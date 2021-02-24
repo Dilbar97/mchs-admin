@@ -1,0 +1,43 @@
+version: '3'
+services:
+  nginx:
+    build:
+      context: ./
+      dockerfile: docker/nginx.docker
+    ports:
+      - "8059:8080"
+    links:
+      - php
+    volumes:
+      - ./docker/nginx:/etc/nginx/conf.d
+      - ./:/var/www:cached
+  php:
+    build:
+      context: ./
+      dockerfile: docker/php-fpm.docker
+    ports:
+      - "9005:9002"
+    links:
+      - postgres
+    volumes:
+      - ./:/var/www
+      - ./docker/php-ini-overrides.ini:/usr/local/etc/php/conf.d/php-ini-overrides.ini
+    environment:
+      - "POSTGRES_USER=mchs"
+      - "POSTGRES_PASSWORD=secret"
+      - "POSTGRES_DB=mchs"
+  postgres:
+    image: postgres:11
+    volumes:
+      - mchs_postgres_database:/var/lib/postgresql/data:Z
+      - ./console/runtime/docker/dump.sql:/dump.sql
+    environment:
+      - "POSTGRES_USER=mchs"
+      - "POSTGRES_PASSWORD=secret"
+      - "POSTGRES_DB=mchs"
+    ports:
+      - "5437:5432"
+    tty: true
+volumes:
+  mchs_postgres_database:
+    external: true

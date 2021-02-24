@@ -1,0 +1,64 @@
+FROM php:7.2-fpm
+
+WORKDIR /var/www
+
+COPY ./docker/php-ini-overrides.ini /usr/local/etc/php/conf.d/
+
+RUN apt-get update && apt-get install -y \
+ libmcrypt-dev \
+ libmagickwand-dev \
+ zip \
+ unzip \
+ libpq-dev \
+ libicu-dev \
+ libmemcached-dev \
+ zlib1g-dev \
+ wkhtmltopdf
+
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN pecl install imagick && docker-php-ext-enable imagick
+RUN pecl install memcached && docker-php-ext-enable memcached
+RUN pecl install xlswriter
+RUN pecl install mcrypt-1.0.3
+RUN pecl install xdebug
+RUN pecl install redis
+RUN pecl install mongodb
+
+RUN docker-php-ext-enable mcrypt
+RUN docker-php-ext-enable xlswriter
+RUN docker-php-ext-enable xdebug
+RUN docker-php-ext-enable redis
+RUN docker-php-ext-enable mongodb
+
+RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+    && docker-php-ext-install pdo_pgsql pgsql pdo_mysql \
+    && docker-php-ext-install zip \
+    && docker-php-ext-install dom \
+    && docker-php-ext-install json \
+    && docker-php-ext-install mbstring \
+    && docker-php-ext-install exif \
+    && docker-php-ext-install simplexml \
+    && docker-php-ext-install intl \
+    && docker-php-ext-install gd \
+    && docker-php-ext-install bcmath \
+    && docker-php-ext-install sockets \
+    && docker-php-ext-install pcntl
+
+RUN docker-php-ext-configure opcache --enable-opcache \
+        && docker-php-ext-install opcache
+
+ENV PHALCON_VERSION=3.4.3
+
+RUN curl -sSL "https://codeload.github.com/phalcon/cphalcon/tar.gz/v${PHALCON_VERSION}" | tar -xz \
+    && cd cphalcon-${PHALCON_VERSION}/build \
+    && ./install \
+    && cp ../tests/_ci/phalcon.ini $(php-config --configure-options | grep -o "with-config-file-scan-dir=\([^ ]*\)" | awk -F'=' '{print $2}') \
+    && cd ../../ \
+    && rm -r cphalcon-${PHALCON_VERSION}
+
+RUN curl -sS https://getcomposer.org/installer | php -- \
+        --filename=composer \
+        --install-dir=/usr/local/bin && \
+        echo "alias composer='composer'" >> /root/.bashrc && \
+        composer

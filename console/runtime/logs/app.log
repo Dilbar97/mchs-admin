@@ -1,0 +1,56 @@
+2021-02-24 17:41:39 [-][-][-][error][yii\console\Exception] yii\console\Exception: Unknown option: --modelClass. Options available: --color, --interactive, --help, --silentExitOnException, --overwrite in /var/www/vendor/yiisoft/yii2/console/Controller.php:175
+Stack trace:
+#0 /var/www/vendor/yiisoft/yii2/base/Module.php(534): yii\console\Controller->runAction('ajaxcrud', Array)
+#1 /var/www/vendor/yiisoft/yii2/console/Application.php(181): yii\base\Module->runAction('gii/ajaxcrud', Array)
+#2 /var/www/vendor/yiisoft/yii2/console/Application.php(148): yii\console\Application->runAction('gii/ajaxcrud', Array)
+#3 /var/www/vendor/yiisoft/yii2/base/Application.php(392): yii\console\Application->handleRequest(Object(yii\console\Request))
+#4 /var/www/yii(23): yii\base\Application->run()
+#5 {main}
+2021-02-24 17:41:39 [-][-][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = []
+
+$_SERVER = [
+    'PHALCON_VERSION' => '3.4.3'
+    'HOSTNAME' => '3231308b8d5c'
+    'PHP_VERSION' => '7.2.34'
+    'POSTGRES_PASSWORD' => 'secret'
+    'PHP_INI_DIR' => '/usr/local/etc/php'
+    'GPG_KEYS' => '1729F83938DA44E27BA0F4D3DBDB397470D12172 B1B44D8F021E4E2D6021E995DC9FF8D3EE5AF27F'
+    'PHP_LDFLAGS' => '-Wl,-O1 -pie'
+    'PWD' => '/var/www'
+    'HOME' => '/root'
+    'PHP_SHA256' => '409e11bc6a2c18707dfc44bc61c820ddfd81e17481470f3405ee7822d8379903'
+    'PHPIZE_DEPS' => 'autoconf 		dpkg-dev 		file 		g++ 		gcc 		libc-dev 		make 		pkg-config 		re2c'
+    'TERM' => 'xterm'
+    'PHP_URL' => 'https://www.php.net/distributions/php-7.2.34.tar.xz'
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi'
+    'SHLVL' => '1'
+    'POSTGRES_USER' => 'mchs'
+    'PHP_CFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'POSTGRES_DB' => 'mchs'
+    'PHP_ASC_URL' => 'https://www.php.net/distributions/php-7.2.34.tar.xz.asc'
+    'PHP_CPPFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64'
+    '_' => '/usr/local/bin/php'
+    'PHP_SELF' => 'yii'
+    'SCRIPT_NAME' => 'yii'
+    'SCRIPT_FILENAME' => 'yii'
+    'PATH_TRANSLATED' => 'yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1614188499.0231
+    'REQUEST_TIME' => 1614188499
+    'argv' => [
+        0 => 'yii'
+        1 => 'gii/ajaxcrud'
+        2 => '--modelClass=common\\models\\Categories'
+        3 => '--searchModelClass=common\\models\\search\\CategoriesSearch'
+        4 => '--viewPath=@backend/views/categories'
+        5 => '--controllerClass=backend\\controllers\\CategoriesController'
+    ]
+    'argc' => 6
+]
