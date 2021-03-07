@@ -13,6 +13,8 @@ use yii\web\UploadedFile;
  * @property string|null $description
  * @property string|null $image
  * @property string|null $created_at
+ * @property string|null $author
+ * @property string|null $source
  */
 class News extends \yii\db\ActiveRecord
 {
@@ -35,7 +37,7 @@ class News extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['description'], 'string'],
+            [['description', 'author', 'source'], 'string'],
             [['created_at'], 'safe'],
             [['title', 'image'], 'string', 'max' => 255],
         ];
@@ -52,6 +54,8 @@ class News extends \yii\db\ActiveRecord
             'description' => 'Описание',
             'image' => 'Картинка',
             'created_at' => 'Дата создания',
+            'author' => 'Автор',
+            'source' => 'Источник',
         ];
     }
 

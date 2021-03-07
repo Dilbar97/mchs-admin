@@ -28,6 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
+            'author',
+            'source',
             'description:ntext',
             'preview' => [
                 'attribute' => 'image',
