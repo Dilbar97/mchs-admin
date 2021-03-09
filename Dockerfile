@@ -4,7 +4,6 @@ FROM php:7.2-fpm
 COPY ./cnf/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./cnf/nginx/admin.conf /sites/admin.conf
 COPY ./cnf/nginx/content.conf /sites/content.conf
-COPY ./cnf/nginx/api.conf /sites/api.conf
 COPY ./cnf/nginx/nginx-status.conf /sites/nginx-status.conf
 
 # Copy code
