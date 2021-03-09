@@ -1,6 +1,4 @@
-FROM docker-registry.thefroot.com/docker-images/php-fpm:php-fpm-0.0.7
-
-MAINTAINER Ivan Kondratyev <ikondratyev@ntcorp.kz>
+FROM php:7.2-fpm
 
 RUN apk --no-cache add nginx supervisor \
     && mkdir -p /etc/nginx/sites-available /autostart/ /var/cache/nginx \
