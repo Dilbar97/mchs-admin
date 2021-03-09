@@ -9,5 +9,4 @@ COPY ./cnf/nginx/nginx-status.conf /sites/nginx-status.conf
 # Copy code
 COPY . /var/www/
 
-RUN php init --env=Development --overwrite=n \
-    && chown -R www-data:www-data /var/www/
+RUN chown -R www-data:www-data /var/www/
